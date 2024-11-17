@@ -1,0 +1,31 @@
+$color-primary-bg: hsl(20, 50%, 98%);
+$color-secondary-bg: hsl(13, 31%, 94%);
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  line-height: 1.6;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 5rem repeat(10, minmax(min-content, 1fr)) 5rem;
+  grid-template-rows: min-content;
+  //   height: 50vh;
+  width: 100%;
+
+  border: 2px solid green;
+  margin-top: 3rem;
+
+  background-color: $color-secondary-bg;
+}

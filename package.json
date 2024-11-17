@@ -1,0 +1,22 @@
+{
+  "name": "product-list-with-cart-main",
+  "version": "1.0.0",
+  "description": "Product List",
+  "main": "index.js",
+  "scripts": {
+    "compile:sass": "node-sass sass/main.scss css/style.css -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Babsman123/product-list.git"
+  },
+  "author": "Tunde Adelani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Babsman123/product-list/issues"
+  },
+  "homepage": "https://github.com/Babsman123/product-list#readme",
+  "devDependencies": {
+    "node-sass": "^9.0.0"
+  }
+}
