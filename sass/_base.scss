@@ -1,6 +1,8 @@
 $color-primary-bg: hsl(20, 50%, 98%);
 $color-secondary-bg: hsl(13, 31%, 94%);
 
+$color-text: hsl(14, 86%, 42%);
+
 *,
 *::before,
 *::after {
@@ -20,7 +22,7 @@ body {
 .container {
   display: grid;
   grid-template-columns: 5rem repeat(10, minmax(min-content, 1fr)) 5rem;
-  grid-template-rows: min-content;
+  grid-template-rows: 10vh min-content;
   //   height: 50vh;
   width: 100%;
 
@@ -28,4 +30,9 @@ body {
   margin-top: 3rem;
 
   background-color: $color-secondary-bg;
+}
+
+.white {
+  //   background-color: green;
+  grid-column: 9 / span 3;
 }

@@ -12,6 +12,17 @@
   },
   {
     "image": {
+      "thumbnail": "./assets/images/image-panna-cotta-thumbnail.jpg",
+      "mobile": "./assets/images/image-panna-cotta-mobile.jpg",
+      "tablet": "./assets/images/image-panna-cotta-tablet.jpg",
+      "desktop": "./assets/images/image-panna-cotta-desktop.jpg"
+    },
+    "name": "Vanilla Panna Cotta",
+    "category": "Panna Cotta",
+    "price": 6.5
+  },
+  {
+    "image": {
       "thumbnail": "./assets/images/image-creme-brulee-thumbnail.jpg",
       "mobile": "./assets/images/image-creme-brulee-mobile.jpg",
       "tablet": "./assets/images/image-creme-brulee-tablet.jpg",
@@ -86,17 +97,6 @@
     "name": "Salted Caramel Brownie",
     "category": "Brownie",
     "price": 4.5
-  },
-  {
-    "image": {
-      "thumbnail": "./assets/images/image-panna-cotta-thumbnail.jpg",
-      "mobile": "./assets/images/image-panna-cotta-mobile.jpg",
-      "tablet": "./assets/images/image-panna-cotta-tablet.jpg",
-      "desktop": "./assets/images/image-panna-cotta-desktop.jpg"
-    },
-    "name": "Vanilla Panna Cotta",
-    "category": "Panna Cotta",
-    "price": 6.5
   },
   {
     "image": {

@@ -45,10 +45,11 @@ function displayDesserts(data) {
     //CATEGORY OF PRODUCT
     const category = document.createElement("p");
     category.textContent = `${item.category}`;
+    category.classList.add("category");
 
     //PRICE
     const price = document.createElement("p");
-    price.textContent = `$ ${item.price}`;
+    price.textContent = `$${item.price}`;
     price.classList.add("price");
 
     //CART
@@ -74,6 +75,7 @@ function displayDesserts(data) {
 
     const increase = document.createElement("img");
     increase.src = "assets/images/icon-increment-quantity.svg";
+    increase.classList.add("increase");
 
     itemNum.appendChild(decrease);
     itemNum.appendChild(cartNum);
@@ -81,34 +83,99 @@ function displayDesserts(data) {
 
     const order = document.querySelector(".product-order");
 
+    const listItem = document.createElement("div");
+    listItem.textContent = `$${item.price}`;
+    listItem.classList.add("order-price");
+
+    const listName = document.createElement("div");
+    listName.textContent = item.name;
+    listName.classList.add("order-name");
+
+    // order.appendChild(listItem);
+
+    function numCart() {
+      let orderNum = document.querySelector(".order-num");
+      let numNew = 1;
+
+      return {
+        increment: function () {
+          let itemNew = Number(orderNum.textContent) + numNew;
+          orderNum.textContent = itemNew;
+        },
+
+        decrement: function () {
+          let itemNew = Number(orderNum.textContent) - numNew;
+          orderNum.textContent = itemNew;
+        },
+      };
+    }
+
+    function addPrice() {
+      let listPrice = item.price;
+      let price = Number(listPrice);
+
+      return {
+        priceHigh: function () {
+          price += item.price;
+          return `$${price}`;
+        },
+
+        priceLow: function () {
+          price -= item.price;
+          return `$${price}`;
+        },
+      };
+    }
+
+    const callCart = numCart();
+    const priceIn = addPrice();
+
     cart.addEventListener("click", () => {
-      console.log(item);
-      console.log(newOrder);
+      callCart.increment();
+      order.appendChild(listItem);
+      order.appendChild(listName);
       itemNum.classList.add("item-num-display");
       cart.classList.add("add-cart-display");
+      picture.classList.add("hover-img");
     });
 
     let addNum = 1;
+    // const realNum = document.querySelector(".order-price").textContent;
+
     increase.addEventListener("click", () => {
       addNum++;
       cartNum.textContent = addNum;
+      const newPrice = priceIn.priceHigh();
+      listItem.textContent = newPrice;
+
+      callCart.increment();
     });
+
     decrease.addEventListener("click", () => {
       addNum--;
       cartNum.textContent = addNum;
-      // cartNum.textContent = addNum < 1 ? (addNum = 1) : addNum--;
-      // itemNum.classList.remove("item-num-display");
-      // cart.classList.remove("add-cart-display");
+      const newPrice = priceIn.priceLow();
+      listItem.textContent = newPrice;
+      callCart.decrement();
+
       if (addNum < 1) {
         cartNum.textContent = 1;
         itemNum.classList.remove("item-num-display");
         cart.classList.remove("add-cart-display");
-        order.style.backgroundColor = "yellow";
+        listItem.remove();
+        listName.remove();
+        picture.classList.remove("hover-img");
+
+        // if (listItem.textContent < item.price) {
+        //   console.log("less than");
+        //   listItem.textContent = item.price;
+        //   console.log(listItem.textContent);
+        // }
       } else {
         cartNum.textContent = addNum;
+        // listItem.textContent = item.price;
       }
     });
-
     cart.appendChild(cartImg);
     cart.appendChild(cartPara);
 
@@ -122,10 +189,10 @@ function displayDesserts(data) {
     menu.appendChild(menuItem);
   });
 
-  const btn = document.querySelectorAll(".btn");
-  btn.forEach((button, index) => {
-    button.addEventListener("click", () => {
-      console.log(data[index]);
-    });
-  });
+  // const btn = document.querySelectorAll(".btn");
+  // btn.forEach((button, index) => {
+  //   button.addEventListener("click", () => {
+  //     console.log(data[index]);
+  //   });
+  // });
 }
