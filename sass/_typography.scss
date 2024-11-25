@@ -12,3 +12,16 @@ h3 {
   font-weight: 600;
   font-size: 2rem;
 }
+
+.product-order {
+  h2 {
+    color: $color-text;
+    font-size: 2.5rem;
+  }
+
+  p {
+    color: $color-rose-500;
+    font-size: 1.3rem;
+    font-weight: 800;
+  }
+}

@@ -83,18 +83,25 @@ function displayDesserts(data) {
 
     const order = document.querySelector(".product-order");
 
-    const listItem = document.createElement("div");
-    listItem.textContent = `$${item.price}`;
+    const cartOrder = document.createElement("div");
+
+    const listItem = document.createElement("p");
+    listItem.textContent = `$${item.price.toFixed(2)}`;
     listItem.classList.add("order-price");
 
-    const listName = document.createElement("div");
+    const listName = document.createElement("p");
     listName.textContent = item.name;
     listName.classList.add("order-name");
 
+    cartOrder.appendChild(listItem);
+    cartOrder.appendChild(listName);
+    const removeListOrder = document.querySelector(".list-order");
+    // console.log(removeListOrder);
     // order.appendChild(listItem);
+    let orderNum = document.querySelector(".order-num");
 
     function numCart() {
-      let orderNum = document.querySelector(".order-num");
+      // let orderNum = document.querySelector(".order-num");
       let numNew = 1;
 
       return {
@@ -112,31 +119,33 @@ function displayDesserts(data) {
 
     function addPrice() {
       let listPrice = item.price;
-      let price = Number(listPrice);
+      let priceNum = Number(listPrice);
 
       return {
         priceHigh: function () {
-          price += item.price;
-          return `$${price}`;
+          priceNum += item.price;
+          return `$${priceNum.toFixed(2)}`;
         },
 
         priceLow: function () {
-          price -= item.price;
-          return `$${price}`;
+          priceNum -= item.price;
+          return `$${priceNum.toFixed(2)}`;
         },
       };
     }
 
-    const callCart = numCart();
     const priceIn = addPrice();
+    const callCart = numCart();
 
     cart.addEventListener("click", () => {
       callCart.increment();
+      // order.appendChild(cartOrder);
       order.appendChild(listItem);
       order.appendChild(listName);
       itemNum.classList.add("item-num-display");
       cart.classList.add("add-cart-display");
       picture.classList.add("hover-img");
+      removeListOrder.classList.add("list-order-remove");
     });
 
     let addNum = 1;
@@ -145,6 +154,7 @@ function displayDesserts(data) {
     increase.addEventListener("click", () => {
       addNum++;
       cartNum.textContent = addNum;
+
       const newPrice = priceIn.priceHigh();
       listItem.textContent = newPrice;
 
@@ -158,19 +168,21 @@ function displayDesserts(data) {
       listItem.textContent = newPrice;
       callCart.decrement();
 
+      if (addNum === 0) {
+        console.log("im now zero");
+        listItem.textContent = `$${item.price}`;
+        const newPrice = priceIn.priceHigh();
+        listItem.textContent = newPrice;
+        console.log(listItem);
+      }
       if (addNum < 1) {
         cartNum.textContent = 1;
+        addNum++;
         itemNum.classList.remove("item-num-display");
         cart.classList.remove("add-cart-display");
         listItem.remove();
         listName.remove();
         picture.classList.remove("hover-img");
-
-        // if (listItem.textContent < item.price) {
-        //   console.log("less than");
-        //   listItem.textContent = item.price;
-        //   console.log(listItem.textContent);
-        // }
       } else {
         cartNum.textContent = addNum;
         // listItem.textContent = item.price;

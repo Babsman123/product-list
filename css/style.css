@@ -116,7 +116,10 @@ body {
       height: 20rem;
       width: 20rem; }
     .product-order .list-order p {
-      margin-top: 2rem; }
+      margin-top: 1rem;
+      margin-bottom: 1.5rem; }
+  .product-order .list-order-remove {
+    display: none; }
 
 .category {
   margin-top: 1.8rem;
@@ -131,6 +134,15 @@ h3 {
   color: #c73a0f;
   font-weight: 600;
   font-size: 2rem; }
+
+.product-order h2 {
+  color: #c73a0f;
+  font-size: 2.5rem; }
+
+.product-order p {
+  color: #87635a;
+  font-size: 1.3rem;
+  font-weight: 800; }
 
 .heading--1 {
   grid-column: 2 / span 2;
