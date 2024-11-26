@@ -82,43 +82,68 @@ function displayDesserts(data) {
     itemNum.appendChild(increase);
 
     const order = document.querySelector(".product-order");
+    const removeListOrder = document.querySelector(".list-order");
+
+    const cancelOrder = document.createElement("img");
+    cancelOrder.src = "assets/images/icon-remove-item.svg";
+
+    //CART NUMBER
+    let addNum = 1;
+    const currentPrice = item.price.toFixed(2);
 
     const cartOrder = document.createElement("div");
 
     const listItem = document.createElement("p");
-    listItem.textContent = `$${item.price.toFixed(2)}`;
+    listItem.textContent = `${addNum}x @ $${currentPrice} $${item.price.toFixed(
+      2
+    )}`;
     listItem.classList.add("order-price");
 
     const listName = document.createElement("p");
     listName.textContent = item.name;
     listName.classList.add("order-name");
 
-    cartOrder.appendChild(listItem);
     cartOrder.appendChild(listName);
-    const removeListOrder = document.querySelector(".list-order");
-    // console.log(removeListOrder);
-    // order.appendChild(listItem);
+    cartOrder.appendChild(listItem);
+    cartOrder.appendChild(cancelOrder);
+
+    // order.appendChild(cartOrder);
     let orderNum = document.querySelector(".order-num");
 
     function numCart() {
-      // let orderNum = document.querySelector(".order-num");
       let numNew = 1;
 
       return {
         increment: function () {
           let itemNew = Number(orderNum.textContent) + numNew;
           orderNum.textContent = itemNew;
+
+          if (itemNew > 0) {
+            removeListOrder.classList.add("list-order-remove");
+
+            cancelOrder.addEventListener("click", () => {
+              let itemNew = Number(orderNum.textContent) + itemNew;
+              console.log(itemNew);
+              console.log("i clicked here");
+            });
+          }
         },
 
         decrement: function () {
           let itemNew = Number(orderNum.textContent) - numNew;
           orderNum.textContent = itemNew;
+
+          if (itemNew === 0) {
+            removeListOrder.classList.remove("list-order-remove");
+            console.log("carNum needs to show");
+          }
         },
       };
     }
 
+    let listPrice = item.price;
+
     function addPrice() {
-      let listPrice = item.price;
       let priceNum = Number(listPrice);
 
       return {
@@ -139,24 +164,19 @@ function displayDesserts(data) {
 
     cart.addEventListener("click", () => {
       callCart.increment();
-      // order.appendChild(cartOrder);
-      order.appendChild(listItem);
-      order.appendChild(listName);
+      order.appendChild(cartOrder);
+      removeListOrder.classList.add("list-order-remove");
       itemNum.classList.add("item-num-display");
       cart.classList.add("add-cart-display");
       picture.classList.add("hover-img");
-      removeListOrder.classList.add("list-order-remove");
     });
-
-    let addNum = 1;
-    // const realNum = document.querySelector(".order-price").textContent;
 
     increase.addEventListener("click", () => {
       addNum++;
       cartNum.textContent = addNum;
 
       const newPrice = priceIn.priceHigh();
-      listItem.textContent = newPrice;
+      listItem.textContent = `${cartNum.textContent}x @ $${currentPrice} ${newPrice}`;
 
       callCart.increment();
     });
@@ -164,15 +184,18 @@ function displayDesserts(data) {
     decrease.addEventListener("click", () => {
       addNum--;
       cartNum.textContent = addNum;
+
       const newPrice = priceIn.priceLow();
-      listItem.textContent = newPrice;
+      listItem.textContent = `${cartNum.textContent}x @ $${currentPrice} ${newPrice}`;
+
       callCart.decrement();
 
       if (addNum === 0) {
         console.log("im now zero");
+
         listItem.textContent = `$${item.price}`;
         const newPrice = priceIn.priceHigh();
-        listItem.textContent = newPrice;
+        listItem.textContent = `1x @ $${currentPrice} ${newPrice}`;
         console.log(listItem);
       }
       if (addNum < 1) {
@@ -180,13 +203,18 @@ function displayDesserts(data) {
         addNum++;
         itemNum.classList.remove("item-num-display");
         cart.classList.remove("add-cart-display");
-        listItem.remove();
-        listName.remove();
+        cartOrder.remove();
         picture.classList.remove("hover-img");
       } else {
         cartNum.textContent = addNum;
         // listItem.textContent = item.price;
       }
+    });
+
+    cancelOrder.addEventListener("click", () => {
+      cartNum.textContent = 1;
+      addNum = 1;
+      listItem.textContent;
     });
     cart.appendChild(cartImg);
     cart.appendChild(cartPara);
@@ -208,3 +236,33 @@ function displayDesserts(data) {
   //   });
   // });
 }
+
+// function numCart() {
+//   let numNew = 1;
+
+//   return {
+//     increment: function () {
+//       let itemNew = Number(orderNum.textContent) + numNew;
+//       orderNum.textContent = itemNew;
+
+//       if (itemNew > 0) {
+//         removeListOrder.classList.add("list-order-remove");
+
+//         cancelOrder.addEventListener("click", () => {
+//           itemNew -= addNum;
+//           orderNum.textContent = itemNew;
+//         });
+//       }
+//     },
+
+//     decrement: function () {
+//       let itemNew = Number(orderNum.textContent) - numNew;
+//       orderNum.textContent = itemNew;
+
+//       if (itemNew === 0) {
+//         removeListOrder.classList.remove("list-order-remove");
+//         console.log("carNum needs to show");
+//       }
+//     },
+//   };
+// }
