@@ -121,6 +121,18 @@ body {
   .product-order .list-order-remove {
     display: none; }
 
+.carbon {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 1rem;
+  background-color: aquamarine; }
+
+.confirm-order {
+  background-color: red; }
+  .confirm-order .confirm-text {
+    background-color: transparent;
+    border: none; }
+
 .category {
   margin-top: 1.8rem;
   text-transform: capitalize;
@@ -143,6 +155,10 @@ h3 {
   color: #87635a;
   font-size: 1.3rem;
   font-weight: 800; }
+
+.carbon-span {
+  color: green;
+  font-size: 2rem; }
 
 .heading--1 {
   grid-column: 2 / span 2;

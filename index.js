@@ -8,15 +8,63 @@ fetch("data.json")
 function displayDesserts(data) {
   const menu = document.getElementById("dessertMenu");
 
-  data.forEach((item) => {
-    // console.log(item.name);
+  let totalPrice = 0;
 
+  console.log(totalPrice);
+  function addToTotal(priceTotal) {
+    let addMore = Number(priceTotal);
+    return {
+      increaseTotal: function () {
+        totalPrice += addMore;
+        return `Total price: $${totalPrice.toFixed(2)}`;
+      },
+
+      decreaseTotal: function () {
+        totalPrice -= addMore;
+        return `Total price: $${totalPrice.toFixed(2)}`;
+      },
+    };
+  }
+
+  const confirmOrder = document.createElement("div");
+  confirmOrder.classList.add("confirm-order");
+  const confirmText = document.createElement("button");
+  confirmText.classList.add("confirm-text");
+  confirmText.textContent = `Confirm Order`;
+
+  confirmOrder.appendChild(confirmText);
+
+  const carbon = document.createElement("div");
+  carbon.classList.add("carbon");
+
+  const carbonImg = document.createElement("img");
+  carbonImg.src = "assets/images/icon-carbon-neutral.svg";
+
+  const carbonText = document.createElement("div");
+
+  const boldtext = document.createElement("span");
+  boldtext.textContent = `carbon-style`;
+  boldtext.classList.add("carbon-span");
+
+  const boldtext2 = document.createElement("span");
+  boldtext2.textContent = ` delivery`;
+
+  carbonText.textContent = `This is a `;
+  carbonText.appendChild(boldtext);
+  carbonText.appendChild(boldtext2);
+
+  console.log();
+  carbon.appendChild(carbonImg);
+  carbon.appendChild(carbonText);
+
+  console.log(carbonText);
+
+  data.forEach((item) => {
     const menuItem = document.createElement("div");
     menuItem.classList.add("menu-item");
 
     //CREATE PICTURE ELEMENT
     const picture = document.createElement("picture");
-    // console.log(picture);
 
     //TABLET AND DESKTOP
     const sourceTablet = document.createElement("source");
@@ -87,11 +135,16 @@ function displayDesserts(data) {
     const cancelOrder = document.createElement("img");
     cancelOrder.src = "assets/images/icon-remove-item.svg";
 
-    //CART NUMBER
+    //CART NUMBER FOR THE LIST ITEM CONTENT
     let addNum = 1;
     const currentPrice = item.price.toFixed(2);
+    //ENDS HERE
 
     const cartOrder = document.createElement("div");
+    cartOrder.classList.add("cart-order");
+
+    const cartOrderItem = document.createElement("div");
+    const productOrder = document.querySelector(".product-order");
 
     const listItem = document.createElement("p");
     listItem.textContent = `${addNum}x @ $${currentPrice} $${item.price.toFixed(
@@ -103,9 +156,14 @@ function displayDesserts(data) {
     listName.textContent = item.name;
     listName.classList.add("order-name");
 
-    cartOrder.appendChild(listName);
-    cartOrder.appendChild(listItem);
-    cartOrder.appendChild(cancelOrder);
+    cartOrderItem.appendChild(listName);
+    cartOrderItem.appendChild(listItem);
+    cartOrderItem.appendChild(cancelOrder);
+
+    cartOrder.appendChild(cartOrderItem);
+    // cartOrder.appendChild(listName);
+    // cartOrder.appendChild(listItem);
+    // cartOrder.appendChild(cancelOrder);
 
     // order.appendChild(cartOrder);
     let orderNum = document.querySelector(".order-num");
@@ -120,12 +178,6 @@ function displayDesserts(data) {
 
           if (itemNew > 0) {
             removeListOrder.classList.add("list-order-remove");
-
-            cancelOrder.addEventListener("click", () => {
-              let itemNew = Number(orderNum.textContent) + itemNew;
-              console.log(itemNew);
-              console.log("i clicked here");
-            });
           }
         },
 
@@ -135,17 +187,16 @@ function displayDesserts(data) {
 
           if (itemNew === 0) {
             removeListOrder.classList.remove("list-order-remove");
-            console.log("carNum needs to show");
           }
         },
       };
     }
 
+    //INCREASE/DECREASE THE PRICE THROUGH THE INCREASE BUTTON (START HERE)
     let listPrice = item.price;
+    let priceNum = Number(listPrice);
 
     function addPrice() {
-      let priceNum = Number(listPrice);
-
       return {
         priceHigh: function () {
           priceNum += item.price;
@@ -158,29 +209,50 @@ function displayDesserts(data) {
         },
       };
     }
+    //(END HERE)
 
-    const priceIn = addPrice();
+    //CAALING OF BOTTH THE ADDPRICE AND NUMCART FUNCTION
     const callCart = numCart();
+    const priceIn = addPrice();
 
+    const totalPriceDisplay = document.getElementById("total-price");
+
+    //BUTTON ADD TO CART EVENT HAPPENS HERE
     cart.addEventListener("click", () => {
       callCart.increment();
       order.appendChild(cartOrder);
-      removeListOrder.classList.add("list-order-remove");
+      productOrder.appendChild(carbon);
+      productOrder.appendChild(confirmOrder);
       itemNum.classList.add("item-num-display");
       cart.classList.add("add-cart-display");
       picture.classList.add("hover-img");
+
+      const price = Number(item.price);
+      const priceOperate = addToTotal(price);
+      console.log(confirmOrder);
+
+      // const newTotalPrice = total.increaseTotal();
+      totalPriceDisplay.textContent = priceOperate.increaseTotal();
     });
 
+    //INCREASE BUTTON INCREASE START HERE (TO INCREASE THE PRICE AND ITEM PICKED NUMBERS)
     increase.addEventListener("click", () => {
       addNum++;
       cartNum.textContent = addNum;
-
       const newPrice = priceIn.priceHigh();
-      listItem.textContent = `${cartNum.textContent}x @ $${currentPrice} ${newPrice}`;
+
+      listItem.textContent = ` ${cartNum.textContent}x @ $${currentPrice} ${newPrice}`;
+
+      const price = Number(item.price);
+      const priceOperate = addToTotal(price);
+
+      // const newTotalPrice = total.increaseTotal();
+      totalPriceDisplay.textContent = priceOperate.increaseTotal();
 
       callCart.increment();
     });
 
+    //DECREASE BUTTON START HERE (TO DECREASE THE PRICE AND ITEM PICKED NUMBERS)
     decrease.addEventListener("click", () => {
       addNum--;
       cartNum.textContent = addNum;
@@ -188,8 +260,16 @@ function displayDesserts(data) {
       const newPrice = priceIn.priceLow();
       listItem.textContent = `${cartNum.textContent}x @ $${currentPrice} ${newPrice}`;
 
+      const price = Number(item.price);
+      const priceOperate = addToTotal(price);
+
+      // const newTotalPrice = total.increaseTotal();
+      // ${cartNum.textContent}x @ $${currentPrice}
+      totalPriceDisplay.textContent = priceOperate.decreaseTotal();
+
       callCart.decrement();
 
+      //WHEN NUMCART IS EQUAL TO ZERO THIS SHOULD HAPPEN (CARTNUM CONTENT)
       if (addNum === 0) {
         console.log("im now zero");
 
@@ -198,6 +278,7 @@ function displayDesserts(data) {
         listItem.textContent = `1x @ $${currentPrice} ${newPrice}`;
         console.log(listItem);
       }
+
       if (addNum < 1) {
         cartNum.textContent = 1;
         addNum++;
@@ -207,14 +288,38 @@ function displayDesserts(data) {
         picture.classList.remove("hover-img");
       } else {
         cartNum.textContent = addNum;
-        // listItem.textContent = item.price;
       }
     });
 
     cancelOrder.addEventListener("click", () => {
+      let cancelNum =
+        Number(orderNum.textContent) - Number(cartNum.textContent);
+      orderNum.textContent = cancelNum;
+      cartOrder.remove();
       cartNum.textContent = 1;
       addNum = 1;
-      listItem.textContent;
+
+      let cancelPrice = Number(priceNum);
+      console.log(cancelPrice);
+
+      listItem.textContent = ` ${
+        cartNum.textContent
+      }x @ $${currentPrice} $${item.price.toFixed(2)}`;
+
+      priceNum = item.price;
+
+      itemNum.classList.remove("item-num-display");
+      cart.classList.remove("add-cart-display");
+      picture.classList.remove("hover-img");
+
+      totalPrice -= cancelPrice;
+      totalPriceDisplay.textContent = `Total price: $${totalPrice.toFixed(2)}`;
+
+      if (cancelNum === 0) {
+        removeListOrder.classList.remove("list-order-remove");
+        confirmOrder.remove();
+        carbon.remove();
+      }
     });
     cart.appendChild(cartImg);
     cart.appendChild(cartPara);
@@ -236,33 +341,3 @@ function displayDesserts(data) {
   //   });
   // });
 }
-
-// function numCart() {
-//   let numNew = 1;
-
-//   return {
-//     increment: function () {
-//       let itemNew = Number(orderNum.textContent) + numNew;
-//       orderNum.textContent = itemNew;
-
-//       if (itemNew > 0) {
-//         removeListOrder.classList.add("list-order-remove");
-
-//         cancelOrder.addEventListener("click", () => {
-//           itemNew -= addNum;
-//           orderNum.textContent = itemNew;
-//         });
-//       }
-//     },
-
-//     decrement: function () {
-//       let itemNew = Number(orderNum.textContent) - numNew;
-//       orderNum.textContent = itemNew;
-
-//       if (itemNew === 0) {
-//         removeListOrder.classList.remove("list-order-remove");
-//         console.log("carNum needs to show");
-//       }
-//     },
-//   };
-// }

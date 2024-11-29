@@ -138,3 +138,18 @@
     display: none;
   }
 }
+
+.carbon {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 1rem;
+  background-color: aquamarine;
+}
+
+.confirm-order {
+  background-color: red;
+  .confirm-text {
+    background-color: transparent;
+    border: none;
+  }
+}
