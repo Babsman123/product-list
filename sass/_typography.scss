@@ -25,8 +25,50 @@ h3 {
     font-weight: 800;
   }
 }
+.cart-order {
+  font-size: 1.3rem;
+}
+
+.item-times {
+  color: $color-text;
+  margin-right: 0.4rem;
+  font-weight: 700;
+}
+
+.item-details {
+  color: $color-rose-300;
+}
+
+.item-details-price {
+  color: $color-rose-400;
+  font-weight: 900;
+  margin-left: 0.6rem;
+}
+
+.total-price-details {
+  .show-order {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .show-price {
+    font-weight: 600;
+    font-size: 1.8rem;
+  }
+}
+.carbon {
+  font-size: 1.1rem;
+  div {
+    margin-left: 0.8rem;
+    margin-top: 0.4rem;
+  }
+}
 
 .carbon-span {
-  color: green;
-  font-size: 2rem;
+  font-weight: 800;
+}
+
+.confirm-text {
+  color: $color-primary-bg;
+  font-weight: 500;
 }

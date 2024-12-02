@@ -26,23 +26,41 @@
       }
     </style>
   </head>
-  <body class="container">
-    <h1 class="heading--1">Desserts</h1>
-    <div class="menu" id="dessertMenu"></div>
-    <div class="white">
-      <div class="product-order">
-        <h2>Your cart (<span class="order-num">0</span>)</h2>
-        <div class="list-order">
-          <img
-            src="./assets/images/illustration-empty-cart.svg"
-            alt="empty-cart"
-          />
-          <p>Your added items will appear here</p>
+  <body>
+    <div class="container">
+      <h1 class="heading--1">Desserts</h1>
+      <div class="menu" id="dessertMenu"></div>
+      <div class="white">
+        <div class="product-order">
+          <h2>Your cart (<span class="order-num">0</span>)</h2>
+          <div class="list-order">
+            <img
+              src="./assets/images/illustration-empty-cart.svg"
+              alt="empty-cart"
+            />
+            <p>Your added items will appear here</p>
+          </div>
+          <!-- <div id="total-price">Total Price: $0</div> -->
         </div>
-        <div id="total-price">Total Price: $0</div>
       </div>
     </div>
 
+    <div class="overlay hidden">
+      <div class="order-receipt">
+        <div class="receipt">
+          <img
+            src="./assets/images/icon-order-confirmed.svg"
+            alt="order-confirmed"
+          />
+          <h2>Order Confirmed</h2>
+          <p>We hope you enjoyed your food</p>
+        </div>
+
+        <div class="confirm-order new-order">
+          <button class="confirm-text">Start New Order</button>
+        </div>
+      </div>
+    </div>
     <!-- <h1>Dessert Menu</h1>
     <div class="menu" id="dessertMenu"></div> -->
 

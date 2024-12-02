@@ -110,7 +110,7 @@
 
 // ADD CART DESIGN
 .product-order {
-  background-color: white;
+  background-color: $color-primary-bg;
   border-radius: 2rem;
   padding: 1rem 1.5rem;
   box-shadow: 0 2rem 2rem rgba($color: #000000, $alpha: 0.1);
@@ -138,18 +138,85 @@
     display: none;
   }
 }
+.cart-order {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $color-rose-300;
+  padding: 1rem 0rem;
 
+  div {
+    margin-right: auto;
+  }
+
+  img {
+    border: 2px solid $color-rose-300;
+    padding: 0.5rem 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}
+
+.total-price-details {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+
+  .show-order {
+    margin-right: auto;
+  }
+}
 .carbon {
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 1rem 1rem;
-  background-color: aquamarine;
+  background-color: $color-secondary-bg;
+  border-radius: 1rem;
+  margin-top: 2rem;
 }
 
 .confirm-order {
-  background-color: red;
+  background-color: $color-text;
+  text-align: center;
+  border-radius: 3rem;
+  margin-top: 1rem;
+
   .confirm-text {
     background-color: transparent;
     border: none;
+    cursor: pointer;
+    width: 100%;
+    height: auto;
+    padding: 1.5rem 1.5rem;
+  }
+}
+
+.order-price {
+  display: flex;
+  flex-direction: row;
+}
+
+//OVERLAY ORDER RCEIPT
+.order-receipt {
+  min-height: 30vh;
+  width: 30rem;
+  padding: 2rem 2rem;
+
+  background: $color-primary-bg;
+  border-radius: 2rem;
+  margin: 5rem auto;
+  // position: fixed;
+  // top: 45%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+
+  picture {
+    border: none;
+
+    img {
+      height: 10rem;
+      width: 10rem;
+      border: none;
+    }
   }
 }
