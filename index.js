@@ -72,17 +72,30 @@ function displayDesserts(data) {
   const showPrice = document.createElement("span");
   showPrice.textContent = totalPrice;
   showPrice.classList.add("show-price");
-  console.log(showPrice);
 
   const blurLayout = document.createElement("div");
   blurLayout.classList.add("blur");
 
-  console.log(carbonText);
+  //TOTAL PRICE FOR  RECEIPT FOR THE TOTAL AMOUNT OF PRODUCT PICKED
+  const receiptTotalPrice = document.createElement("div");
+  receiptTotalPrice.classList.add("receipt-total-price");
 
-  const orderReceipt = document.querySelector(".receipt");
-  console.log(orderReceipt);
+  const receiptTotalOrder = document.createElement("span");
+  receiptTotalOrder.textContent = showOrder.textContent;
+  receiptTotalOrder.classList.add("receipt-total-order");
 
-  const receiptPics = document.createElement("p");
+  const receiptTotalAmount = document.createElement("span");
+  receiptTotalAmount.classList.add("receipt-total-amount");
+
+  receiptTotalPrice.appendChild(receiptTotalOrder);
+  receiptTotalPrice.appendChild(receiptTotalAmount);
+
+  //TOTAL PRICE FOR RECEIPT END HERE
+  const customerOrder = document.querySelector(".customer-order");
+  console.log(customerOrder);
+
+  const resetOrder = document.querySelector(".new-order");
+  console.log(resetOrder);
 
   data.forEach((item) => {
     const menuItem = document.createElement("div");
@@ -176,7 +189,7 @@ function displayDesserts(data) {
     const listItem = document.createElement("div");
 
     const itemTimes = document.createElement("span");
-    itemTimes.textContent = `${addNum}x`;
+    itemTimes.textContent = `${addNum}X`;
     itemTimes.classList.add("item-times");
 
     const itemDetails = document.createElement("span");
@@ -206,7 +219,7 @@ function displayDesserts(data) {
     totalPriceDetails.appendChild(showPrice);
 
     let orderNum = document.querySelector(".order-num");
-
+    //CLOSURE FOR THE NUMBER OF CARTS PICKED AND SHOWING NUMBER
     function numCart() {
       let numNew = 1;
 
@@ -258,6 +271,43 @@ function displayDesserts(data) {
     const priceIn = addPrice();
 
     // const totalPriceDisplay = document.getElementById("total-price");
+    const orderList = document.createElement("div");
+    orderList.classList.add("order-list");
+
+    const productDetails = document.createElement("div");
+    productDetails.classList.add("product-details");
+
+    const productTotalPrice = document.createElement("p");
+    productTotalPrice.textContent = itemDetailsPrice.textContent;
+    productTotalPrice.classList.add("product-price");
+
+    const orderItem = document.createElement("div");
+
+    const orderText = document.createElement("p");
+    orderText.classList.add("product-name");
+    orderText.textContent = listName.textContent;
+
+    const orderDetails = document.createElement("P");
+    orderDetails.classList.add("order-details");
+
+    const orderTimes = document.createElement("span");
+    orderTimes.textContent = itemTimes.textContent;
+    orderDetails.textContent = itemDetails.textContent;
+
+    orderDetails.appendChild(orderTimes);
+
+    orderItem.appendChild(orderText);
+    orderItem.appendChild(orderDetails);
+
+    const orderImg = document.createElement("img");
+    orderImg.src = item.image.mobile;
+    orderImg.alt = item.name;
+
+    productDetails.appendChild(orderImg);
+    productDetails.appendChild(orderItem);
+
+    orderList.appendChild(productDetails);
+    orderList.appendChild(productTotalPrice);
 
     //BUTTON ADD TO CART EVENT HAPPENS HERE
     cart.addEventListener("click", () => {
@@ -272,18 +322,15 @@ function displayDesserts(data) {
 
       const price = Number(item.price);
       const priceOperate = addToTotal(price);
-
-      // const newTotalPrice = total.increaseTotal();
-      // totalPriceDisplay.textContent = priceOperate.increaseTotal();
       showPrice.textContent = priceOperate.increaseTotal();
 
       confirmOrder.addEventListener("click", () => {
         overlay.classList.remove("hidden");
-        console.log(listName);
-        receiptPics.textContent = listName.textContent;
-        console.log(receiptPics);
-        orderReceipt.appendChild(receiptPics);
-        // orderReceipt.appendChild(picture);
+
+        customerOrder.appendChild(orderList);
+        customerOrder.appendChild(receiptTotalPrice);
+        console.log(customerOrder);
+        receiptTotalAmount.textContent = showPrice.textContent;
       });
     });
 
@@ -293,19 +340,19 @@ function displayDesserts(data) {
       cartNum.textContent = addNum;
       const newPrice = priceIn.priceHigh();
 
-      itemTimes.textContent = `${cartNum.textContent}x`;
+      itemTimes.textContent = `${cartNum.textContent}X`;
       itemDetails.textContent = ` @ $${currentPrice} `;
       itemDetailsPrice.textContent = `${newPrice}`;
-      // listItem.textContent = ` ${cartNum.textContent}x @ $${currentPrice} ${newPrice}`;
 
       const price = Number(item.price);
       const priceOperate = addToTotal(price);
 
-      // const newTotalPrice = total.increaseTotal();
-      // totalPriceDisplay.textContent = priceOperate.increaseTotal();
+      orderTimes.textContent = itemTimes.textContent;
+      productTotalPrice.textContent = `${newPrice}`;
       showPrice.textContent = priceOperate.increaseTotal();
 
       callCart.increment();
+      receiptTotalAmount.textContent = showPrice.textContent;
     });
 
     //DECREASE BUTTON START HERE (TO DECREASE THE PRICE AND ITEM PICKED NUMBERS)
@@ -315,32 +362,28 @@ function displayDesserts(data) {
 
       const newPrice = priceIn.priceLow();
 
-      itemTimes.textContent = `${cartNum.textContent}x`;
+      itemTimes.textContent = `${cartNum.textContent}X`;
       itemDetails.textContent = ` @ $${currentPrice}`;
       itemDetailsPrice.textContent = `${newPrice}`;
 
       const price = Number(item.price);
       const priceOperate = addToTotal(price);
 
-      // const newTotalPrice = total.increaseTotal();
-      // ${cartNum.textContent}x @ $${currentPrice}
-      // totalPriceDisplay.textContent = priceOperate.decreaseTotal();
       showPrice.textContent = priceOperate.decreaseTotal();
 
       callCart.decrement();
+      orderTimes.textContent = itemTimes.textContent;
+      productTotalPrice.textContent = `${newPrice}`;
+      receiptTotalAmount.textContent = showPrice.textContent;
 
       //WHEN NUMCART IS EQUAL TO ZERO THIS SHOULD HAPPEN (CARTNUM CONTENT)
       if (addNum === 0) {
-        console.log("im now zero");
-
-        // listItem.textContent = `$${item.price}`;
         const newPrice = priceIn.priceHigh();
-        itemTimes.textContent = `1x`;
+        itemTimes.textContent = `1X`;
         itemDetails.textContent = ` @ $${currentPrice}`;
         itemDetailsPrice.textContent = `${newPrice}`;
 
-        // listItem.textContent = `1x @ $${currentPrice} ${newPrice}`;
-        console.log(listItem);
+        orderTimes.textContent = itemTimes.textContent;
       }
 
       if (addNum < 1) {
@@ -364,21 +407,24 @@ function displayDesserts(data) {
       addNum = 1;
 
       let cancelPrice = Number(priceNum);
-      // console.log(cancelPrice);
 
-      itemTimes.textContent = `${cartNum.textContent}x`;
+      itemTimes.textContent = `${cartNum.textContent}X`;
       itemDetails.textContent = ` @ $${currentPrice}`;
       itemDetailsPrice.textContent = `$${item.price.toFixed(2)}`;
 
       priceNum = item.price;
+      console.log(document.querySelector(".order-list"));
 
       itemNum.classList.remove("item-num-display");
       cart.classList.remove("add-cart-display");
       picture.classList.remove("hover-img");
 
       totalPrice -= cancelPrice;
-      // totalPriceDisplay.textContent = `Total price: $${totalPrice.toFixed(2)}`;
       showPrice.textContent = `$${totalPrice.toFixed(2)}`;
+
+      confirmOrder.addEventListener("click", () => {
+        orderList.remove();
+      });
 
       if (cancelNum === 0) {
         removeListOrder.classList.remove("list-order-remove");
@@ -387,15 +433,11 @@ function displayDesserts(data) {
         totalPriceDetails.remove();
       }
     });
-    // receiptPics.appendChild(listName);
 
-    // confirmText.addEventListener("click", () => {
-    //   overlay.classList.remove("hidden");
-    //   // console.log(totalPrice);
-    //   //   console.log(
-    //   //     (receiptPics.textContent = cartOrderItem.appendChild(listName))
-    //   // );
-    // });
+    resetOrder.addEventListener("click", () => {
+      console.log("i want to reset the order now");
+      overlay.classList.add("hidden");
+    });
 
     cart.appendChild(cartImg);
     cart.appendChild(cartPara);
@@ -410,4 +452,5 @@ function displayDesserts(data) {
     menu.appendChild(menuItem);
   });
 }
+
 // productOrder.appendChild(totalPriceDetails);

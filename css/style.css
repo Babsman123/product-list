@@ -170,17 +170,48 @@ body {
 
 .order-receipt {
   min-height: 30vh;
-  width: 30rem;
+  width: 50rem;
   padding: 2rem 2rem;
   background: #fcf9f7;
   border-radius: 2rem;
   margin: 5rem auto; }
-  .order-receipt picture {
-    border: none; }
-    .order-receipt picture img {
-      height: 10rem;
-      width: 10rem;
-      border: none; }
+
+.customer-order {
+  background-color: #f4edeb;
+  border-radius: 1rem;
+  padding: 1.5rem 2rem; }
+
+.order-list {
+  display: flex;
+  border-bottom: 1px solid #c9aea6;
+  padding-bottom: 1rem;
+  width: 100%; }
+  .order-list img {
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+    margin-right: 1rem;
+    border-radius: 1rem; }
+  .order-list:not(:last-child) {
+    margin-bottom: 2rem; }
+  .order-list .product-details {
+    display: flex;
+    margin-right: auto; }
+    .order-list .product-details div {
+      margin-top: 0.3rem; }
+  .order-list .product-price {
+    align-self: center; }
+
+.order-details {
+  display: flex;
+  flex-direction: row; }
+  .order-details span {
+    order: -1; }
+
+.receipt-total-price {
+  display: flex; }
+  .receipt-total-price .receipt-total-order {
+    margin-right: auto; }
 
 .category {
   margin-top: 1.8rem;
@@ -241,6 +272,39 @@ h3 {
 .confirm-text {
   color: #fcf9f7;
   font-weight: 500; }
+
+.receipt h2 {
+  font-size: 3rem; }
+
+.receipt .receipt-p {
+  margin-bottom: 1rem;
+  font-size: 1.3rem; }
+
+.order-list .product-name {
+  color: #260f08;
+  font-size: 1.3rem;
+  font-weight: 700; }
+
+.order-list .product-price {
+  color: #260f08;
+  font-size: 1.7rem;
+  font-weight: 800; }
+
+.order-details {
+  font-size: 1.2rem;
+  color: #c9aea6; }
+  .order-details span {
+    color: #c73a0f;
+    margin-right: 1rem;
+    font-weight: 700; }
+
+.receipt-total-price .receipt-total-order {
+  font-size: 1.4rem;
+  font-weight: 500; }
+
+.receipt-total-price .receipt-total-amount {
+  font-size: 1.9rem;
+  font-weight: 900; }
 
 .heading--1 {
   grid-column: 2 / span 2;

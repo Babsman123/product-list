@@ -72,3 +72,47 @@ h3 {
   color: $color-primary-bg;
   font-weight: 500;
 }
+
+.receipt {
+  h2 {
+    font-size: 3rem;
+  }
+  .receipt-p {
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+  }
+}
+.order-list {
+  .product-name {
+    color: $color-rose-900;
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  .product-price {
+    color: $color-rose-900;
+    font-size: 1.7rem;
+    font-weight: 800;
+  }
+}
+
+.order-details {
+  font-size: 1.2rem;
+  color: $color-rose-300;
+  span {
+    color: $color-text;
+    margin-right: 1rem;
+    font-weight: 700;
+  }
+}
+
+.receipt-total-price {
+  .receipt-total-order {
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+  .receipt-total-amount {
+    font-size: 1.9rem;
+    font-weight: 900;
+  }
+}

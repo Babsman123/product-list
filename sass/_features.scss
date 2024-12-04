@@ -199,24 +199,65 @@
 //OVERLAY ORDER RCEIPT
 .order-receipt {
   min-height: 30vh;
-  width: 30rem;
+  width: 50rem;
   padding: 2rem 2rem;
 
   background: $color-primary-bg;
   border-radius: 2rem;
   margin: 5rem auto;
-  // position: fixed;
-  // top: 45%;
-  // left: 50%;
-  // transform: translate(-50%, -50%);
+}
 
-  picture {
-    border: none;
+.customer-order {
+  background-color: $color-rose-100;
+  border-radius: 1rem;
+  padding: 1.5rem 2rem;
+}
 
-    img {
-      height: 10rem;
-      width: 10rem;
-      border: none;
+.order-list {
+  display: flex;
+  border-bottom: 1px solid $color-rose-300;
+  padding-bottom: 1rem;
+  width: 100%;
+
+  img {
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+    margin-right: 1rem;
+    border-radius: 1rem;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  .product-details {
+    display: flex;
+    margin-right: auto;
+
+    div {
+      margin-top: 0.3rem;
     }
+  }
+
+  .product-price {
+    align-self: center;
+  }
+}
+
+.order-details {
+  display: flex;
+  flex-direction: row;
+
+  span {
+    order: -1;
+  }
+}
+
+.receipt-total-price {
+  display: flex;
+
+  .receipt-total-order {
+    margin-right: auto;
   }
 }
