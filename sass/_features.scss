@@ -1,6 +1,7 @@
 .menu-item {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  margin-top: 0.5rem;
 
   //EACH PICTURE DESIGN STARTS HERE
   picture {
@@ -205,6 +206,10 @@
   background: $color-primary-bg;
   border-radius: 2rem;
   margin: 5rem auto;
+
+  @media only screen and (max-width: $bp-mobile) {
+    max-width: 35rem;
+  }
 }
 
 .customer-order {
@@ -260,4 +265,8 @@
   .receipt-total-order {
     margin-right: auto;
   }
+}
+
+.order-list-disappear {
+  display: none;
 }

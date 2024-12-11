@@ -29,6 +29,7 @@ body {
   line-height: 1.6;
   background-color: $color-secondary-bg;
   position: relative;
+  font-family: "Red Hat Text", sans-serif;
 }
 
 .container {
@@ -44,6 +45,7 @@ body {
 
   @media only screen and (max-width: $bp-mobile) {
     grid-template-columns: 3rem repeat(10, minmax(min-content, 1fr)) 3rem;
+    grid-template-rows: 7vh min-content;
     margin-bottom: 2rem;
   }
 }

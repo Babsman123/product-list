@@ -1,7 +1,7 @@
 .heading--1 {
   grid-column: 2 / span 2;
   grid-row: 1 / 2;
-  margin: 0 2rem;
+  // margin: 0 2rem;
 
   @media only screen and (max-width: $bp-mobile) {
   }
@@ -20,15 +20,10 @@
   justify-items: center;
   grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
 
-  // grid-column: 9 / span 3;
-
-  // @media only screen and (max-width: $bp-mobile) {
-  //   grid-column: 1 / -1;
-  // }
-
   @media only screen and (max-width: $bp-mobile) {
     grid-column: 2 / span 10;
     grid-template-columns: 1fr;
+    grid-row-gap: 2rem;
   }
 }
 
@@ -42,6 +37,7 @@
     grid-column: 2 / span 10;
     grid-row: 5 /-1;
     margin: 0;
+    margin-top: 1.5rem;
   }
 }
 

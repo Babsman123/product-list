@@ -10,7 +10,6 @@ function displayDesserts(data) {
 
   let totalPrice = 0;
 
-  console.log(totalPrice);
   function addToTotal(priceTotal) {
     let addMore = Number(priceTotal);
     return {
@@ -58,7 +57,6 @@ function displayDesserts(data) {
   carbonText.appendChild(boldtext);
   carbonText.appendChild(boldtext2);
 
-  console.log();
   carbon.appendChild(carbonImg);
   carbon.appendChild(carbonText);
 
@@ -92,10 +90,8 @@ function displayDesserts(data) {
 
   //TOTAL PRICE FOR RECEIPT END HERE
   const customerOrder = document.querySelector(".customer-order");
-  console.log(customerOrder);
 
   const resetOrder = document.querySelector(".new-order");
-  console.log(resetOrder);
 
   data.forEach((item) => {
     const menuItem = document.createElement("div");
@@ -135,7 +131,7 @@ function displayDesserts(data) {
 
     //PRICE
     const price = document.createElement("p");
-    price.textContent = `$${item.price}`;
+    price.textContent = `$${item.price.toFixed(2)}`;
     price.classList.add("price");
 
     //CART
@@ -219,6 +215,7 @@ function displayDesserts(data) {
     totalPriceDetails.appendChild(showPrice);
 
     let orderNum = document.querySelector(".order-num");
+
     //CLOSURE FOR THE NUMBER OF CARTS PICKED AND SHOWING NUMBER
     function numCart() {
       let numNew = 1;
@@ -242,6 +239,7 @@ function displayDesserts(data) {
             confirmOrder.remove();
             carbon.remove();
             totalPriceDetails.remove();
+            orderList.remove();
           }
         },
       };
@@ -270,7 +268,7 @@ function displayDesserts(data) {
     const callCart = numCart();
     const priceIn = addPrice();
 
-    // const totalPriceDisplay = document.getElementById("total-price");
+    const totalPriceDisplay = document.getElementById("total-price");
     const orderList = document.createElement("div");
     orderList.classList.add("order-list");
 
@@ -313,9 +311,11 @@ function displayDesserts(data) {
     cart.addEventListener("click", () => {
       callCart.increment();
       order.appendChild(cartOrder);
+      // console.log(cartOrder);
       productOrder.appendChild(totalPriceDetails);
       productOrder.appendChild(carbon);
       productOrder.appendChild(confirmOrder);
+
       itemNum.classList.add("item-num-display");
       cart.classList.add("add-cart-display");
       picture.classList.add("hover-img");
@@ -324,12 +324,13 @@ function displayDesserts(data) {
       const priceOperate = addToTotal(price);
       showPrice.textContent = priceOperate.increaseTotal();
 
+      customerOrder.appendChild(orderList);
+
       confirmOrder.addEventListener("click", () => {
         overlay.classList.remove("hidden");
 
-        customerOrder.appendChild(orderList);
+        // customerOrder.appendChild(orderList);
         customerOrder.appendChild(receiptTotalPrice);
-        console.log(customerOrder);
         receiptTotalAmount.textContent = showPrice.textContent;
       });
     });
@@ -382,8 +383,8 @@ function displayDesserts(data) {
         itemTimes.textContent = `1X`;
         itemDetails.textContent = ` @ $${currentPrice}`;
         itemDetailsPrice.textContent = `${newPrice}`;
-
         orderTimes.textContent = itemTimes.textContent;
+        orderList.remove();
       }
 
       if (addNum < 1) {
@@ -393,6 +394,7 @@ function displayDesserts(data) {
         cart.classList.remove("add-cart-display");
         cartOrder.remove();
         picture.classList.remove("hover-img");
+        // orderList.remove();
       } else {
         cartNum.textContent = addNum;
       }
@@ -435,8 +437,33 @@ function displayDesserts(data) {
     });
 
     resetOrder.addEventListener("click", () => {
-      console.log("i want to reset the order now");
       overlay.classList.add("hidden");
+      cartNum.textContent = 1;
+      addNum = 1;
+      orderNum.textContent = 0;
+      removeListOrder.classList.remove("list-order-remove");
+      cartOrder.remove();
+
+      itemTimes.textContent = `${cartNum.textContent}X`;
+      itemDetailsPrice.textContent = `$${item.price.toFixed(2)}`;
+      priceNum = item.price;
+
+      totalPrice = 0;
+
+      itemNum.classList.remove("item-num-display");
+      cart.classList.remove("add-cart-display");
+      picture.classList.remove("hover-img");
+
+      orderTimes.textContent = itemTimes.textContent;
+      productTotalPrice.textContent = `$${item.price.toFixed(2)}`;
+
+      confirmOrder.remove();
+      carbon.remove();
+      totalPriceDetails.remove();
+
+      // orderList.remove();
+
+      location.reload();
     });
 
     cart.appendChild(cartImg);

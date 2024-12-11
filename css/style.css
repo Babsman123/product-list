@@ -11,7 +11,8 @@ html {
 body {
   line-height: 1.6;
   background-color: #f4edeb;
-  position: relative; }
+  position: relative;
+  font-family: "Red Hat Text", sans-serif; }
 
 .container {
   display: grid;
@@ -22,11 +23,13 @@ body {
   @media only screen and (max-width: 37.5em) {
     .container {
       grid-template-columns: 3rem repeat(10, minmax(min-content, 1fr)) 3rem;
+      grid-template-rows: 7vh min-content;
       margin-bottom: 2rem; } }
 
 .menu-item {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); }
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 0.5rem; }
   .menu-item picture {
     grid-column: 1 / -1;
     grid-row: 1 /2;
@@ -175,6 +178,9 @@ body {
   background: #fcf9f7;
   border-radius: 2rem;
   margin: 5rem auto; }
+  @media only screen and (max-width: 37.5em) {
+    .order-receipt {
+      max-width: 35rem; } }
 
 .customer-order {
   background-color: #f4edeb;
@@ -212,6 +218,12 @@ body {
   display: flex; }
   .receipt-total-price .receipt-total-order {
     margin-right: auto; }
+
+.order-list-disappear {
+  display: none; }
+
+.heading--1 {
+  font-size: 2.5rem; }
 
 .category {
   margin-top: 1.8rem;
@@ -308,8 +320,7 @@ h3 {
 
 .heading--1 {
   grid-column: 2 / span 2;
-  grid-row: 1 / 2;
-  margin: 0 2rem; }
+  grid-row: 1 / 2; }
 
 .menu {
   grid-column: 2 / span 7;
@@ -323,7 +334,8 @@ h3 {
   @media only screen and (max-width: 37.5em) {
     .menu {
       grid-column: 2 / span 10;
-      grid-template-columns: 1fr; } }
+      grid-template-columns: 1fr;
+      grid-row-gap: 2rem; } }
 
 .white {
   grid-column: 9 / span 3;
@@ -333,7 +345,8 @@ h3 {
     .white {
       grid-column: 2 / span 10;
       grid-row: 5 /-1;
-      margin: 0; } }
+      margin: 0;
+      margin-top: 1.5rem; } }
 
 .overlay {
   position: fixed;
