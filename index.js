@@ -325,6 +325,7 @@ function displayDesserts(data) {
       showPrice.textContent = priceOperate.increaseTotal();
 
       customerOrder.appendChild(orderList);
+      console.log(customerOrder);
 
       confirmOrder.addEventListener("click", () => {
         overlay.classList.remove("hidden");
@@ -383,7 +384,9 @@ function displayDesserts(data) {
         itemTimes.textContent = `1X`;
         itemDetails.textContent = ` @ $${currentPrice}`;
         itemDetailsPrice.textContent = `${newPrice}`;
+        console.log(itemDetailsPrice);
         orderTimes.textContent = itemTimes.textContent;
+        productTotalPrice.textContent = itemDetailsPrice.textContent;
         orderList.remove();
       }
 
